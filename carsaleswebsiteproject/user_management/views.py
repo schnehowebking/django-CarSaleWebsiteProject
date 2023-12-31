@@ -95,10 +95,9 @@ def order_history(request):
     orders = Order.objects.filter(user=request.user)
     return render(request, 'user_management/profile.html', {'orders': orders})
 
-@login_required
+@login_required(login_url='login')
 def buy_car(request, pk):
     car = get_object_or_404(Car, pk=pk)
-
     if request.method == 'POST':
         car.quantity -= 1
         car.save()

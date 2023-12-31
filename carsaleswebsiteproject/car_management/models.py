@@ -19,11 +19,10 @@ class Car(models.Model):
         return self.name
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=100)
     comment = models.TextField()
-
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -28,36 +28,33 @@ def contactPage(request):
     return render(request, './car_management/contact.html')
 
 
-@method_decorator(login_required(login_url=reverse_lazy('login')), name='dispatch')
+
 class CarDetailsPageView(DetailView):
     model = Car
     template_name = 'car_management/car_details.html'
     pk_url_kwarg = 'pk'
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            car = self.get_object()
-            return render(request, self.template_name,{'car': car})
-        return HttpResponseRedirect(reverse_lazy('login'))
+        car = self.get_object()
+        return render(request, self.template_name,{'car': car})
     
-@method_decorator(login_required(login_url=reverse_lazy('login')), name='dispatch')
+
 class CarDetailsPageViewshop(DetailView):
     model = Car
     template_name = 'car_management/car_details.html'
     pk_url_kwarg = 'pk'
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            car = self.get_object()
-            return render(request, self.template_name, {'car': car})
-        return HttpResponseRedirect(reverse_lazy('login'))
+        car = self.get_object()
+        return render(request, self.template_name, {'car': car})
 
 
-
-@login_required
 def add_comment(request, pk):
     car = get_object_or_404(Car, pk=pk)
     if request.method == 'POST':
         name = request.POST.get('name')
         comment_text = request.POST.get('comment')
-        Comment.objects.create(user=request.user, car=car, name=name, comment=comment_text)
+        if request.user.is_authenticated:
+            Comment.objects.create(user=request.user, car=car, name=name, comment=comment_text)
+        else:
+            Comment.objects.create(user=None, car=car, name=name, comment=comment_text)
     return render(request, 'car_management/car_details.html', {'car': car})
 

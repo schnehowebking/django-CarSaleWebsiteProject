@@ -1,23 +1,49 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block title %}Shop List{% endblock  %}
+{% extends 'base.html' %} 
+{% load static  %} 
+{% block title %}Shop List{% endblock %} 
 
 {% block content %}
 
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
 <div class="d-flex align-center justify-content-center row">
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card my-2" >
-                    </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6 m-auto">
+          <div class="card my-2">
+            <form class="contact2-form validate-form">
+              <span class="contact2-form-title"> Contact Us </span>
+              <div
+                class="wrap-input2 validate-input"
+                data-validate="Name is required">
+                <input class="input2" type="text" name="name" />
+                <span class="focus-input2" data-placeholder="NAME"></span>
+              </div>
+              <div
+                class="wrap-input2 validate-input"
+                data-validate="Valid email is required: ex@abc.xyz">
+                <input class="input2" type="text" name="email" />
+                <span class="focus-input2" data-placeholder="EMAIL"></span>
+              </div>
+              <div
+                class="wrap-input2 validate-input"
+                data-validate="Message is required">
+                <textarea class="input2" name="message"></textarea>
+                <span class="focus-input2" data-placeholder="MESSAGE"></span>
+              </div>
+              <div class="container-contact2-form-btn">
+                <div class="wrap-contact2-form-btn">
+                  <div class="contact2-form-bgbtn"></div>
+                  <button class="btn btn-warning">Send Your Message</button>
                 </div>
-               
-            </div>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
-
-{% endblock  %}
+{% endblock %}
