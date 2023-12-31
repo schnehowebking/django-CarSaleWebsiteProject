@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Update Profile {% endblock  %}
+
+{% block content %}
+
+<div class="card col-md-6 m-auto">
+    <div class="card-header">
+        <h2>Update Profile Form</h2>
+    </div>
+    <div class="card-body">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form | crispy}}
+            
+            <input class="btn btn-success" type="submit" value="Update Profile">
+
+        </form>
+    </div>
+</div>
+
+{% endblock  %}

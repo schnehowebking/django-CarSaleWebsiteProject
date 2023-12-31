@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+Profile
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <h1>Hello {{user}}</h1>
+
+    <div class="div">
+        <a href="{% url 'update_profile' user.id %}" class="btn btn-info">Profile Update</a>
+    <a href="{% url 'change_password' %}" class="btn btn-warning">Change Password</a>
+    </div>
+</div>
+<div class="d-flex align-center justify-content-center row mt-5">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Your Order History</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+
+                                <th>Car Name</th>
+                                <th>Bought Date</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for order in orders %}
+                            <tr>
+
+                                <td>{{ order.car.name }}</td>
+                                <td>{{ order.purchase_date }}</td>
+                                <td>{{ order.car.price }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                   
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

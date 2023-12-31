@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Shop List{% endblock  %}
+
+{% block content %}
+
+<div class="d-flex align-center justify-content-center row mt-5">
+    <div class="card">
+    
+        <div class="card-header">
+            <div class="row d-flex">
+                <div class="col">
+                    <a class="nav-link" href="{% url 'shoppage' %}">All</a>
+                </div>
+                {% for brand in brands %}
+                <div class="col">
+                    <a class="nav-link" href="{% url 'car_list_by_brand' brand.slug %}">{{brand.name}}</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card-body">
+            <h5>Showing {{ cars | length }} items</h5>
+            <div class="row"> 
+                {% for car in cars %}
+                    <div class="col-md-4">
+                        <div class="card my-2" >
+                            <img src="{{ car.image.url }}" class="card-img-top" alt="{{ car.name }}">
+                            <div class="card-body">
+                                <h5>{{ car.name }}</h5>
+                                <p class="text-muted">${{ car.price }}</p>
+                                <p ><span class="badge bg-info">{{ car.brand}}</span></p>
+                                <a href="{% url 'carDetailspageshop' car.id %}" class="btn btn-warning">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                    
+               
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+{% endblock  %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock  %}
+
+{% block content %}
+
+<div class="d-flex align-center justify-content-center row">
+    <div class="col-md-6">
+        <h1>Welcome To <span style="font-size:40px; font-weight:900; color:green;">CurHut</span></h1>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium praesentium commodi deleniti consequuntur aliquam, et debitis suscipit, fuga error a vitae cum corrupti alias ut dolorem, reiciendis maxime pariatur? Dolore.</p>
+        <div class="row align-center justify-content-left" style="max-width:300px;">
+            <div class="col-sm-6"><a href="{% url 'shoppage' %}" class="btn btn-info">Shop Now</a></div>
+            <div class="col-sm-6"><a href="{% url 'contact' %}" class="btn btn-dark">Contact</a></div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <img class="img-fluid" src=" {% static './car_banner.jpeg' %}" alt="">
+    </div>
+</div>
+<div class="d-flex align-center justify-content-center row">
+    <div class="card">
+    
+        <div class="card-header">
+            <div class="row d-flex">
+                <div class="col">
+                    <a class="nav-link" href="/">All</a>
+                </div>
+                {% for brand in brands %}
+                <div class="col">
+                    <a class="nav-link" href="{% url 'car_list_by_brand_index' brand.slug %}">{{brand.name}}</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card-body">
+            <h5>Showing {{ cars | length }} items</h5>
+            <div class="row"> 
+                
+                {% for car in cars %}
+                    <div class="col-md-4">
+                        <div class="card my-2" >
+                            <img src="{{ car.image.url }}" class="card-img-top" alt="{{ car.name }}">
+                            <div class="card-body">
+                                <h5>{{ car.name }}</h5>
+                                <p class="text-muted">${{ car.price }}</p>
+                                <p ><span class="badge bg-info">{{ car.brand}}</span></p>
+                                <a href="{% url 'carDetailspage' car.id %}" class="btn btn-warning">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                    
+               
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+{% endblock  %}
